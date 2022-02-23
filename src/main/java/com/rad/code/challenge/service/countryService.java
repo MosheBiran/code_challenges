@@ -39,7 +39,8 @@ public class countryService implements countryServiceInterface{
 
     @Override
     public String createCountry(country c) {
-        return null;
+        countryRepo.save(c);
+        return "";
     }
 
     @Override
