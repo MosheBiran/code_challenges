@@ -49,11 +49,14 @@ public class countryService implements countryServiceInterface{
     }
 
     @Override
-    public void deleteCountry(String name) {
-
+    public void deleteCountry(String id) {
+        countryRepo.deleteById(id);
     }
 
     @Override
+    /**
+     * Returns all objects of a country that contain the following fields
+     */
     public List<country> getCountrysByFields(List<String> fields) {
 
         Query query = new Query();
@@ -64,12 +67,20 @@ public class countryService implements countryServiceInterface{
         return c;
     }
 
+    /**
+     *
+     * @return Returns all countries whose population is greater than three hundred million
+     */
     public List<country> getCountrysOver3M() {
         Query query = new Query();
         query.addCriteria(new Criteria().where("population").gt(300000000));
         return mongoTemplate.find(query,country.class,"country");
         }
 
+    /**
+     *
+      * @return Returns the largest country in terms of area
+     */
     public country getBiggestCountry() {
     final Aggregation aggregation = newAggregation(
             Aggregation.sort(Sort.Direction.DESC, "area")
