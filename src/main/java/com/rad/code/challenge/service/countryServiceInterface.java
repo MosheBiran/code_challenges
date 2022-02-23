@@ -12,4 +12,5 @@ public interface countryServiceInterface {
     void deleteCountry(String name);
     List<country> getCountrysByFields(List<String> fieldS);
     List<country> getCountrysOver3M();
+    country getBiggestCountry();
 }

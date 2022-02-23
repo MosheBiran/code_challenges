@@ -30,6 +30,11 @@ public class apiController {
         return countryService.getCountrysOver3M();
     }
 
+    @GetMapping("/country/maxarea")
+    public country getBiggest_Countrys() {
+        return countryService.getBiggestCountry();
+    }
+
     @GetMapping("/country/{id}")
     public country getCountryBy_id(@PathVariable(value = "id") String id) throws Exception {
         return countryService.getCountryById(id);

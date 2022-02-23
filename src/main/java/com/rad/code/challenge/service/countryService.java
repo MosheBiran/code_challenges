@@ -70,4 +70,11 @@ public class countryService implements countryServiceInterface{
         return mongoTemplate.find(query,country.class,"country");
         }
 
+    public country getBiggestCountry() {
+    final Aggregation aggregation = newAggregation(
+            Aggregation.sort(Sort.Direction.DESC, "area")
+    );
+    AggregationResults<country> results = mongoTemplate.aggregate(aggregation, "country", country.class);
+    return results.getMappedResults().get(0);
+    }
 }
