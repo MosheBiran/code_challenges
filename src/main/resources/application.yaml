@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: coding-challenge
+info:
+  app:
+    name: ${spring.application.name}
+    port: ${server.port}
+    host: ${HOSTNAME:localhost}
+  java:
+    vendor: ${java.specification.vendor}
+    version: ${java.specification.version}
