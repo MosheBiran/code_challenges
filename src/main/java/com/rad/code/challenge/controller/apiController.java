@@ -25,6 +25,10 @@ public class apiController {
         return countryService.getCountrysByFields(field_to);
     }
 
+    @GetMapping("/country/300million")
+    public List<country> getCountrysByFields() {
+        return countryService.getCountrysOver3M();
+    }
 
     @GetMapping("/country/{id}")
     public country getCountryBy_id(@PathVariable(value = "id") String id) throws Exception {

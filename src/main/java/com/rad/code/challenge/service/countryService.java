@@ -4,15 +4,20 @@ import com.mongodb.BasicDBObject;
 import com.rad.code.challenge.entities.country;
 import com.rad.code.challenge.entities.nameObject;
 import com.rad.code.challenge.mongo.countryRepository;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoAction;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.*;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperationContext;
 
 import java.util.List;
+
+import static com.mongodb.client.model.Aggregates.sort;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 @Service
 public class countryService implements countryServiceInterface{
@@ -59,5 +64,10 @@ public class countryService implements countryServiceInterface{
         return c;
     }
 
+    public List<country> getCountrysOver3M() {
+        Query query = new Query();
+        query.addCriteria(new Criteria().where("population").gt(300000000));
+        return mongoTemplate.find(query,country.class,"country");
+        }
 
 }

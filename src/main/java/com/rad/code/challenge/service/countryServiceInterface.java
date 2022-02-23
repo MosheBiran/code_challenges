@@ -11,4 +11,5 @@ public interface countryServiceInterface {
     String createCountry(country c);
     void deleteCountry(String name);
     List<country> getCountrysByFields(List<String> fieldS);
+    List<country> getCountrysOver3M();
 }
